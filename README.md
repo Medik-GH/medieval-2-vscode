@@ -1,4 +1,4 @@
-## TW Script
+## Medieval 2 VSCode
 Visual Studio Code language extension for working with Medieval 2 files
 
 ![alt text](./images/image.png)

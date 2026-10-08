@@ -1,19 +1,21 @@
 {
-  "name": "tw-script",
-  "displayName": "tw-script",
+  "name": "medieval-2-tw-script",
+  "displayName": "Medieval 2 Synax",
   "description": "Language extension for working with Medieval 2: Total War text files",
-  "version": "1.1.2",
+  "version": "2.0.0",
+  "publisher": "Medik-GH",
+  "icon": "images/icon.png",
   "engines": {
     "vscode": "^1.80.0"
   },
   "categories": [
     "Programming Languages"
   ],
-  "repository": "https://github.com/EddieEldridge/tw-script",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Medik-GH/medieval-2-vscode.git"
+  },
   "main": "./out/extension.js",
-  "activationEvents": [
-    "onLanguage:tw-script"
-  ],
   "scripts": {
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
