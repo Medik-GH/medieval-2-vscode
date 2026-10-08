@@ -103,8 +103,26 @@ const EFFECT_DEFINITIONS: Record<string, EffectDef> = {
     'BattleSurgery': { description: 'Casualties recovering', valueMultiplier: 3, isPercentage: true, useNegativeDescr: false, isReduction: false, isHidden: false },
 };
 
-function formatEffectValue(effectName: string, rawValue: number): string {
+// Combat_V_Faction_<faction> / Combat_V_Religion_<religion> take the target as a name suffix
+const COMBAT_VS_PATTERN = /^Combat_V_(?:Faction|Religion)_(\w+)$/;
+
+function getEffectDef(effectName: string): EffectDef | undefined {
     const def = EFFECT_DEFINITIONS[effectName];
+    if (def) {
+        return def;
+    }
+
+    const combatMatch = effectName.match(COMBAT_VS_PATTERN);
+    if (combatMatch) {
+        const target = combatMatch[1].replace(/_/g, ' ');
+        return { description: `Command vs ${target}`, valueMultiplier: 1, isPercentage: false, useNegativeDescr: false, isReduction: false, isHidden: false };
+    }
+
+    return undefined;
+}
+
+function formatEffectValue(effectName: string, rawValue: number): string {
+    const def = getEffectDef(effectName);
     if (!def || def.isHidden) {
         return '';
     }
@@ -230,7 +248,7 @@ class TWScriptInlayHintsProvider implements vscode.InlayHintsProvider {
                 );
                 hint.paddingLeft = true;
 
-                const def = EFFECT_DEFINITIONS[effectName];
+                const def = getEffectDef(effectName);
                 if (def && def.valueMultiplier !== 1) {
                     hint.tooltip = new vscode.MarkdownString(
                         `**Raw Value:** ${rawValue}\n\n` +

@@ -17,7 +17,7 @@ export const UNIT_FIELD_SCHEMAS: Record<string, Record<number, UnitFieldValue>> 
     },
     stat_health: {
         0: { shortLabel: 'man HP', description: 'Hit points of the soldier' },
-        1: { shortLabel: 'mount HP', description: 'Hit points of mount or attached animal (0 if none)' },
+        1: { shortLabel: 'secondary/mount HP', description: 'Hit points of mount or attached animal (0 if none). Used in autoresolve for normal units.' },
     },
     stat_pri: {
         0: { shortLabel: 'attack', description: 'Primary attack factor' },
@@ -93,6 +93,15 @@ export const UNIT_FIELD_SCHEMAS: Record<string, Record<number, UnitFieldValue>> 
     },
     stat_mental: {
         0: { shortLabel: 'morale', description: 'Base morale level' },
+    },
+    stat_stl: {
+        0: { shortLabel: 'min alive', description: 'Number of soldiers needed for unit to count as alive' },
+    },
+    move_speed_mod: {
+        0: { shortLabel: 'speed ×', description: 'Movement speed multiplier' },
+    },
+    recruit_priority_offset: {
+        0: { shortLabel: 'AI priority', description: 'Offset added to the AI recruitment priority for this unit' },
     },
     stat_cost: {
         0: { shortLabel: 'turns', description: 'Number of turns to build/recruit' },
